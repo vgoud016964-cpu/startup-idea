@@ -4,27 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SOLOCARE | Your Everyday Companion</title>
-  <link rel="icon" type="image/png" href="logo.png">
+<link rel="icon" type="image/png" href="logo.png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
 :root {
-  --primary: #4F46E5; /* Indigo */
-  --primary-hover: #4338CA;
-  --secondary: #F43F5E; /* Coral/Rose for SOS */
-  --bg-color: #F8FAFC; /* Very light blue/gray */
+  /* Premium Palette */
+  --primary: #4338CA; /* Deeper Indigo */
+  --primary-light: #EEF2FF;
+  --primary-hover: #3730A3;
+  --secondary: #E11D48; /* Premium Rose for SOS */
+  --secondary-light: #FFE4E6;
+  --bg-color: #F8FAFC;
   --surface: #FFFFFF;
   --text-main: #0F172A;
   --text-muted: #64748B;
   --border: #E2E8F0;
-  --success: #10B981;
   
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.01);
+  --shadow-hover: 0 25px 30px -5px rgb(67 56 202 / 0.1), 0 10px 15px -6px rgb(67 56 202 / 0.05);
   
-  --radius-md: 12px;
-  --radius-lg: 20px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,73 +42,53 @@ button, input, textarea, select { font: inherit; }
 button { cursor: pointer; border: none; background: none; }
 .hidden { display: none !important; }
 
-/* Typography */
 h1, h2, h3, .logo { font-family: 'Plus Jakarta Sans', sans-serif; }
 
-/* UPDATED LOGO STYLE: Medium Size */
-.brand-logo {
-  height: 80px; 
-  width: auto;
-  display: block;
-  object-fit: contain;
-}
+/* --- LOGO STYLING --- */
+.logo { display: block; object-fit: contain; }
+.auth-left .logo { height: 60px; margin-bottom: 20px; filter: brightness(0) invert(1); }
+.auth-right .logo { height: 80px; margin: 0 auto 30px; }
+.sidebar .logo { height: 45px; margin: 0 0 40px 10px; }
 
-button:focus-visible, input:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
-}
-
-/* AUTHENTICATION SCREEN */
-.auth {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
+/* --- AUTH SCREEN --- */
+.auth { min-height: 100vh; display: grid; grid-template-columns: 1.1fr 1fr; }
 .auth-left {
   padding: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+  display: flex; flex-direction: column; justify-content: space-between;
+  background: linear-gradient(145deg, #312E81 0%, #4338CA 50%, #6D28D9 100%);
   color: white;
-  position: relative;
-  overflow: hidden;
+  position: relative; overflow: hidden;
 }
-/* Add abstract shapes for "unique" feel */
 .auth-left::before {
-  content: ''; position: absolute; width: 400px; height: 400px;
-  background: rgba(255,255,255,0.1); border-radius: 50%; top: -100px; left: -100px;
+  content: ''; position: absolute; width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%; top: -150px; left: -150px;
 }
-.auth-left .logo { color: white; }
-.auth-left .logo span { color: #C7D2FE; }
-
 .hero { max-width: 480px; position: relative; z-index: 1; }
-.hero h1 { font-size: clamp(40px, 4vw, 56px); line-height: 1.1; margin-bottom: 24px; font-weight: 800; }
-.hero p { font-size: 18px; color: #E0E7FF; line-height: 1.6; }
+.hero h1 { font-size: clamp(40px, 5vw, 64px); line-height: 1.05; margin-bottom: 24px; font-weight: 800; letter-spacing: -1px; }
+.hero p { font-size: 18px; color: #E0E7FF; line-height: 1.6; font-weight: 400; }
 .quote {
-  border-left: 4px solid #C7D2FE; padding-left: 20px;
-  color: #E0E7FF; line-height: 1.6; font-size: 15px; position: relative; z-index: 1;
+  border-left: 3px solid #818CF8; padding-left: 20px;
+  color: #C7D2FE; line-height: 1.6; font-size: 15px; position: relative; z-index: 1; font-style: italic;
 }
 
-.auth-right {
-  display: flex; align-items: center; justify-content: center; padding: 40px;
-  background: var(--surface);
-}
+.auth-right { display: flex; align-items: center; justify-content: center; padding: 40px; background: var(--surface); }
 .auth-box { width: 100%; max-width: 400px; }
-.auth-box h2 { font-size: 32px; margin-top: 30px; margin-bottom: 8px; letter-spacing: -0.5px; }
-.subtitle { color: var(--text-muted); margin-bottom: 30px; font-size: 15px; }
+.auth-box h2 { font-size: 32px; margin-bottom: 8px; letter-spacing: -0.5px; font-weight: 800; }
+.subtitle { color: var(--text-muted); margin-bottom: 30px; font-size: 15px; font-weight: 500; }
 
+/* Forms */
 .field { margin-bottom: 20px; }
 .field label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
-.field input, .field textarea, .field select {
-  width: 100%; padding: 14px 16px; background: var(--surface);
+.field input {
+  width: 100%; padding: 14px 16px; background: var(--bg-color);
   border: 1px solid var(--border); border-radius: 10px; color: var(--text-main);
-  transition: all 0.2s;
+  transition: all 0.2s; font-size: 15px;
 }
-.field input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); outline: none; }
+.field input:focus { background: var(--surface); border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-light); outline: none; }
 .password-wrap { display: flex; gap: 10px; }
 .password-wrap input { flex: 1; min-width: 0; }
-.eye { background: var(--bg-color); border: 1px solid var(--border); color: var(--text-main); border-radius: 10px; padding: 0 16px; font-weight: 500; font-size: 14px; transition: 0.2s; }
+.eye { background: var(--bg-color); border: 1px solid var(--border); color: var(--text-main); border-radius: 10px; padding: 0 16px; font-weight: 600; font-size: 13px; transition: 0.2s; }
 .eye:hover { background: var(--border); }
 
 .primary {
@@ -114,144 +97,162 @@ button:focus-visible, input:focus-visible {
   box-shadow: var(--shadow-md);
 }
 .primary:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-
-.switch { text-align: center; color: var(--text-muted); font-size: 14px; margin-top: 24px; }
-.switch button { color: var(--primary); font-weight: 600; }
+.switch { text-align: center; color: var(--text-muted); font-size: 14px; margin-top: 24px; font-weight: 500; }
+.switch button { color: var(--primary); font-weight: 700; }
 .switch button:hover { text-decoration: underline; }
-.error { background: #FEF2F2; color: #B91C1C; border: 1px solid #FECACA; padding: 12px; border-radius: 8px; margin-top: 20px; font-size: 14px; }
+.error { background: #FEF2F2; color: #B91C1C; border: 1px solid #FECACA; padding: 12px; border-radius: 10px; margin-top: 20px; font-size: 14px; }
 .note { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin-top: 30px; text-align: center; }
 
-/* DASHBOARD */
+/* --- DASHBOARD --- */
 #dashboard { display: none; min-height: 100vh; }
 .sidebar {
   position: fixed; inset: 0 auto 0 0; width: 260px; background: var(--surface);
   border-right: 1px solid var(--border); padding: 30px 20px; display: flex; flex-direction: column; z-index: 10;
 }
-.sidebar .brand-logo { margin: 0 10px 40px; }
-.nav-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; color: var(--text-muted); margin: 0 10px 12px; }
-.nav { display: flex; flex-direction: column; gap: 4px; }
+.nav-label { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: #94A3B8; margin: 0 10px 12px; }
+.nav { display: flex; flex-direction: column; gap: 6px; }
 .nav button {
-  background: transparent; color: var(--text-muted); padding: 14px 16px;
-  text-align: left; border-radius: 10px; font-size: 15px; font-weight: 500; transition: all 0.2s;
+  background: transparent; color: var(--text-muted); padding: 12px 16px;
+  text-align: left; border-radius: 10px; font-size: 15px; font-weight: 600; transition: all 0.2s;
   display: flex; align-items: center; gap: 12px;
 }
+.nav button svg { width: 20px; height: 20px; stroke-width: 2; transition: 0.2s; }
 .nav button:hover { background: var(--bg-color); color: var(--text-main); }
-.nav button.active { background: #EEF2FF; color: var(--primary); font-weight: 600; }
+.nav button.active { background: var(--primary-light); color: var(--primary); }
+.nav button.active svg { stroke: var(--primary); }
 
 .user-mini {
   margin-top: auto; border-top: 1px solid var(--border); padding-top: 20px;
   display: flex; align-items: center; gap: 14px;
 }
 .avatar {
-  background: #EEF2FF; color: var(--primary); width: 42px; height: 42px;
-  border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 18px;
+  background: var(--primary-light); color: var(--primary); width: 42px; height: 42px;
+  border-radius: 12px; display: grid; place-items: center; font-weight: 800; font-size: 18px;
 }
-.user-mini strong { display: block; font-size: 14px; }
-.user-mini small { color: var(--text-muted); font-size: 12px; }
+.user-mini strong { display: block; font-size: 14px; font-weight: 700; }
+.user-mini small { color: var(--text-muted); font-size: 12px; font-weight: 500; }
 
 .main { margin-left: 260px; padding: 40px; max-width: 1600px; }
 .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
-.topbar h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
-.topbar p { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+.topbar h2 { font-size: 32px; font-weight: 800; letter-spacing: -0.5px; }
+.topbar p { font-size: 15px; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
 .topbar button {
   border: 1px solid var(--border); background: var(--surface); color: var(--text-main);
-  padding: 10px 18px; border-radius: 8px; font-weight: 500; font-size: 14px; transition: 0.2s;
+  padding: 10px 18px; border-radius: 10px; font-weight: 600; font-size: 14px; transition: 0.2s;
+  box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 8px;
 }
-.topbar button:hover { background: var(--bg-color); }
+.topbar button:hover { background: var(--bg-color); transform: translateY(-1px); }
 
-.page { display: none; animation: fadeIn 0.3s ease; }
+.page { display: none; animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
 .page.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
+/* Welcome Banner */
 .welcome {
-  background: linear-gradient(120deg, #ffffff, #f1f5f9);
+  background: linear-gradient(120deg, #FFFFFF 0%, #F1F5F9 100%);
   border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 40px;
   display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 24px;
   box-shadow: var(--shadow-sm);
 }
-.welcome small { color: var(--primary); font-weight: 700; letter-spacing: 1px; font-size: 12px; }
-.welcome h1 { font-size: 32px; margin: 12px 0; font-weight: 800; color: var(--text-main); }
-.welcome p { color: var(--text-muted); line-height: 1.6; font-size: 15px; }
-.welcome-icon { font-size: 64px; opacity: 0.8; }
+.welcome small { color: var(--primary); font-weight: 800; letter-spacing: 1px; font-size: 12px; }
+.welcome h1 { font-size: 36px; margin: 12px 0; font-weight: 800; color: var(--text-main); letter-spacing: -1px; }
+.welcome p { color: var(--text-muted); line-height: 1.6; font-size: 16px; font-weight: 500; }
+.welcome-icon { width: 80px; height: 80px; background: var(--primary-light); border-radius: 20px; display: grid; place-items: center; color: var(--primary); }
 
+/* SOS */
 .sos {
-  background: #FFF1F2; border: 1px solid #FECDD3; border-radius: var(--radius-md);
+  background: var(--secondary-light); border: 1px solid #FECDD3; border-radius: var(--radius-md);
   padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;
 }
-.sos h3 { color: #9F1239; font-size: 18px; margin-bottom: 4px; }
-.sos p { color: #BE123C; font-size: 14px; }
+.sos h3 { color: #9F1239; font-size: 18px; margin-bottom: 4px; font-weight: 800; }
+.sos p { color: #BE123C; font-size: 14px; font-weight: 500; }
 .sos button {
   background: var(--secondary); color: white; padding: 12px 24px;
-  border-radius: 8px; font-weight: 700; transition: 0.2s; box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3);
+  border-radius: 10px; font-weight: 700; transition: 0.2s; box-shadow: 0 4px 12px rgba(225, 29, 72, 0.2);
 }
-.sos button:hover { background: #E11D48; transform: translateY(-2px); }
+.sos button:hover { background: #BE123C; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(225, 29, 72, 0.3); }
 
-.section-title { font-size: 20px; font-weight: 700; margin: 32px 0 20px; color: var(--text-main); letter-spacing: -0.5px; }
-
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
-.stat, .card, .panel {
+/* Stats */
+.section-title { font-size: 22px; font-weight: 800; margin: 40px 0 20px; color: var(--text-main); letter-spacing: -0.5px; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 32px; }
+.stat {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-sm);
+  display: flex; flex-direction: column; gap: 12px; transition: 0.2s;
 }
-.stat small { color: var(--text-muted); font-size: 13px; font-weight: 500; }
-.stat h2 { font-size: 28px; font-weight: 800; margin-top: 8px; color: var(--text-main); }
-.stat-icon { font-size: 24px; margin-bottom: 12px; }
+.stat:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.stat-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--bg-color); display: grid; place-items: center; color: var(--primary); }
+.stat-icon svg { width: 20px; height: 20px; }
+.stat small { color: var(--text-muted); font-size: 13px; font-weight: 600; }
+.stat h2 { font-size: 28px; font-weight: 800; color: var(--text-main); }
 
-.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+/* Cards */
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .card {
-  cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex; flex-direction: column;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 24px;
+  cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex; flex-direction: column; box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
 }
-.card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: #C7D2FE; }
+.card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--primary); opacity: 0; transition: 0.3s; }
+.card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: #C7D2FE; }
+.card:hover::before { opacity: 1; }
 .card-icon {
-  width: 48px; height: 48px; border-radius: 12px; background: #EEF2FF;
-  display: grid; place-items: center; font-size: 24px; margin-bottom: 20px; color: var(--primary);
+  width: 48px; height: 48px; border-radius: 12px; background: var(--bg-color);
+  display: grid; place-items: center; margin-bottom: 20px; color: var(--primary); transition: 0.3s;
 }
-.card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
-.card p { font-size: 14px; color: var(--text-muted); line-height: 1.5; flex-grow: 1; }
-.card a { color: var(--primary); font-size: 13px; font-weight: 700; margin-top: 16px; display: inline-block; }
+.card-icon svg { width: 24px; height: 24px; stroke-width: 2; }
+.card:hover .card-icon { background: var(--primary-light); }
+.card h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; color: var(--text-main); }
+.card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; flex-grow: 1; font-weight: 500; }
+.card a { color: var(--primary); font-size: 13px; font-weight: 800; margin-top: 20px; display: inline-flex; align-items: center; gap: 6px; }
+.card a::after { content: '→'; transition: 0.2s; }
+.card:hover a::after { transform: translateX(4px); }
 
-.panel { margin-bottom: 24px; padding: 32px; }
-.panel h3 { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--text-main); }
-.panel p { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-bottom: 16px; }
+/* Panels */
+.panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; margin-bottom: 24px; box-shadow: var(--shadow-sm); }
+.panel h3 { font-size: 24px; font-weight: 800; margin-bottom: 12px; color: var(--text-main); }
+.panel p { color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-bottom: 20px; font-weight: 500; }
 
 .action {
-  background: var(--primary); color: white; padding: 12px 20px;
-  border-radius: 8px; font-weight: 600; font-size: 14px; margin: 8px 8px 8px 0; transition: 0.2s;
+  background: var(--primary); color: white; padding: 12px 24px;
+  border-radius: 10px; font-weight: 700; font-size: 14px; margin: 8px 8px 8px 0; transition: 0.2s;
+  box-shadow: var(--shadow-sm); display: inline-flex; align-items: center; gap: 8px;
 }
-.action:hover { background: var(--primary-hover); }
-.secondary { background: var(--bg-color); color: var(--text-main); border: 1px solid var(--border); }
+.action:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.secondary { background: var(--bg-color); color: var(--text-main); border: 1px solid var(--border); box-shadow: none; }
 .secondary:hover { background: var(--border); }
-.danger { background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA; }
+.danger { background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA; box-shadow: none; }
 .danger:hover { background: #FEE2E2; }
 
-.result { background: var(--bg-color); padding: 16px; border-radius: 10px; margin-top: 16px; font-size: 14px; line-height: 1.6; border: 1px solid var(--border); color: var(--text-main); }
+.result { background: var(--bg-color); padding: 20px; border-radius: 12px; margin-top: 20px; font-size: 15px; line-height: 1.6; border: 1px solid var(--border); color: var(--text-main); font-weight: 500; }
 .small-input {
-  background: var(--surface); color: var(--text-main); border: 1px solid var(--border);
-  border-radius: 8px; padding: 12px 16px; margin: 8px 8px 8px 0; max-width: 100%;
+  background: var(--bg-color); color: var(--text-main); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px 16px; margin: 8px 8px 8px 0; max-width: 100%; transition: 0.2s;
 }
-.small-input:focus { border-color: var(--primary); outline: none; }
+.small-input:focus { background: var(--surface); border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-light); outline: none; }
 
-.item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
+.item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--border); font-size: 15px; font-weight: 500; }
 .item:last-child { border-bottom: none; }
+.item span { display: flex; align-items: center; gap: 8px; }
 
-.chatbox { height: 300px; overflow-y: auto; background: var(--bg-color); padding: 20px; border-radius: 12px; margin: 16px 0; border: 1px solid var(--border); }
-.message { background: var(--surface); padding: 14px 18px; border-radius: 12px; border-bottom-left-radius: 4px; margin-bottom: 12px; font-size: 14px; max-width: 80%; box-shadow: var(--shadow-sm); }
-.mine { background: #EEF2FF; color: var(--primary); margin-left: auto; border-bottom-left-radius: 12px; border-bottom-right-radius: 4px; }
+.chatbox { height: 300px; overflow-y: auto; background: var(--bg-color); padding: 20px; border-radius: 16px; margin: 20px 0; border: 1px solid var(--border); }
+.message { background: var(--surface); padding: 14px 18px; border-radius: 16px; border-bottom-left-radius: 4px; margin-bottom: 12px; font-size: 14px; max-width: 80%; box-shadow: var(--shadow-sm); font-weight: 500; }
+.mine { background: var(--primary); color: white; margin-left: auto; border-bottom-left-radius: 16px; border-bottom-right-radius: 4px; }
 
 .moods { display: flex; gap: 16px; flex-wrap: wrap; margin: 24px 0; }
 .mood { background: var(--surface); border: 2px solid var(--border); border-radius: 16px; padding: 16px; font-size: 28px; transition: 0.2s; }
 .mood:hover { border-color: #C7D2FE; transform: scale(1.05); }
-.mood.selected { border-color: var(--primary); background: #EEF2FF; }
+.mood.selected { border-color: var(--primary); background: var(--primary-light); box-shadow: 0 0 0 4px var(--primary-light); }
 
 .breath-circle {
-  width: 140px; height: 140px; border-radius: 50%; background: var(--primary);
+  width: 160px; height: 160px; border-radius: 50%; background: var(--primary);
   margin: 30px auto; display: grid; place-items: center; color: white; font-weight: 600;
-  transition: transform 4s ease-in-out; box-shadow: 0 0 30px rgba(79, 70, 229, 0.3);
+  transition: transform 4s ease-in-out; box-shadow: 0 0 40px rgba(67, 56, 202, 0.3);
+  font-size: 18px; letter-spacing: 1px;
 }
 
-footer { text-align: center; color: var(--text-muted); font-size: 13px; padding: 40px 0 20px; }
-.notice { font-size: 13px !important; color: var(--text-muted) !important; margin-top: 16px; background: #F8FAFC; padding: 12px; border-radius: 8px; border-left: 3px solid var(--border); }
+footer { text-align: center; color: var(--text-muted); font-size: 13px; padding: 40px 0 20px; font-weight: 500; }
+.notice { font-size: 13px !important; color: var(--text-muted) !important; margin-top: 16px; background: var(--bg-color); padding: 16px; border-radius: 10px; border-left: 4px solid var(--primary); font-weight: 500; }
 
 @media(max-width: 1024px) {
   .cards { grid-template-columns: repeat(2, 1fr); }
@@ -261,13 +262,14 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
   .auth { grid-template-columns: 1fr; }
   .auth-left { display: none; }
   .auth-right { min-height: 100vh; }
-  .sidebar { inset: auto 0 0 0; width: 100%; height: auto; padding: 10px; border: none; border-top: 1px solid var(--border); flex-direction: row; }
-  .sidebar > .brand-logo, .nav-label, .user-mini { display: none; }
+  .sidebar { inset: auto 0 0 0; width: 100%; height: auto; padding: 10px; border: none; border-top: 1px solid var(--border); flex-direction: row; background: var(--surface); }
+  .sidebar > .logo, .nav-label, .user-mini { display: none; }
   .nav { flex-direction: row; justify-content: space-around; width: 100%; }
   .nav button { text-align: center; font-size: 11px; padding: 10px 5px; flex: 1; flex-direction: column; gap: 4px; }
+  .nav button svg { width: 24px; height: 24px; }
   .main { margin: 0; padding: 24px 16px 100px; }
   .welcome { padding: 24px; flex-direction: column; text-align: center; }
-  .welcome h1 { font-size: 26px; }
+  .welcome h1 { font-size: 28px; }
   .welcome-icon { display: none; }
   .sos { flex-direction: column; text-align: center; gap: 16px; }
   .cards { grid-template-columns: 1fr; }
@@ -277,37 +279,28 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
 </head>
 <body>
 
-<!-- SIGN IN / REGISTRATION -->
-
+<!-- AUTHENTICATION -->
 <section class="auth" id="auth">
  <div class="auth-left">
-  <!-- LOGO FIXED: White version, specific size for split screen -->
-  <img src="logo.png" alt="SOLOCARE" class="brand-logo" style="filter: brightness(0) invert(1); height: 70px; width: auto; object-fit: contain;">
-  
+  <img src="logo.png" alt="SOLOCARE" class="logo">
   <div class="hero">
    <h1>Living alone.<br>Never alone.</h1>
    <p>Your personal companion for safety, wellness, everyday needs and meaningful connections. A little support can make every day better.</p>
   </div>
-  <div class="quote">"Independence feels better when someone cares."<br><small>— The SOLOCARE Promise</small></div>
+  <div class="quote">"Independence feels better when someone cares."<br><small style="font-style:normal; font-weight:600; color:#E0E7FF;">— The SOLOCARE Promise</small></div>
  </div>
 
  <div class="auth-right">
   <div class="auth-box">
-   <!-- LOGO FIXED: Centered -->
-   <div style="text-align: center; margin-bottom: 20px;">
-    <img src="logo.png" alt="SOLOCARE" class="brand-logo">
-   </div>
-
-   <!-- LOGIN FORM -->
+   <img src="logo.png" alt="SOLOCARE" class="logo">
+   
    <form id="loginForm">
     <h2>Welcome home.</h2>
     <p class="subtitle">Your safe space starts here.</p>
-
     <div class="field">
      <label>Email address</label>
      <input id="loginEmail" type="email" placeholder="you@example.com" required>
     </div>
-
     <div class="field">
      <label>Password</label>
      <div class="password-wrap">
@@ -315,16 +308,13 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
       <button class="eye" type="button" onclick="togglePassword('loginPassword',this)">Show</button>
      </div>
     </div>
-
     <button class="primary" type="submit">Sign In →</button>
     <p class="switch">New to SOLOCARE? <button type="button" onclick="showRegister()">Create an account</button></p>
    </form>
 
-   <!-- REGISTRATION FORM -->
    <form id="registerForm" class="hidden">
     <h2>Create your space.</h2>
     <p class="subtitle">Let's get you started with SOLOCARE.</p>
-
     <div class="field">
      <label>Full name</label>
      <input id="regName" type="text" placeholder="Your name" required minlength="2">
@@ -344,32 +334,46 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
      <label>Confirm password</label>
      <input id="regConfirm" type="password" placeholder="Repeat password" required>
     </div>
-
     <button class="primary" type="submit">Create Account →</button>
     <p class="switch">Already a member? <button type="button" onclick="showLogin()">Sign in</button></p>
    </form>
 
    <div id="authError" class="error hidden" role="alert"></div>
-   <p class="note">Prototype version: accounts are stored in this browser only. Do not enter real sensitive information. Secure authentication is needed before public deployment.</p>
+   <p class="note">Prototype version: accounts are stored in this browser only. Secure authentication is needed before public deployment.</p>
   </div>
  </div>
 </section>
 
-<!-- MAIN DASHBOARD -->
-
+<!-- DASHBOARD -->
 <div id="dashboard">
  <aside class="sidebar">
-  <!-- LOGO FIXED: Sidebar -->
-  <img src="logo.png" alt="SOLOCARE" class="brand-logo">
-  
+  <img src="logo.png" alt="SOLOCARE" class="logo">
   <div class="nav-label">YOUR SPACE</div>
   <nav class="nav">
-   <button class="active" data-page="home" onclick="showPage('home',this)">⌂ Home</button>
-   <button data-page="attendance" onclick="showPage('attendance',this)">✓ Check-in</button>
-   <button data-page="health" onclick="showPage('health',this)">✚ Health</button>
-   <button data-page="groceries" onclick="showPage('groceries',this)">🛒 Shop</button>
-   <button data-page="chat" onclick="showPage('chat',this)">♡ Connect</button>
-   <button data-page="more" onclick="showPage('more',this)">⚙ More</button>
+   <button class="active" data-page="home" onclick="showPage('home',this)">
+     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+     Home
+   </button>
+   <button data-page="attendance" onclick="showPage('attendance',this)">
+     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+     Check-in
+   </button>
+   <button data-page="health" onclick="showPage('health',this)">
+     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+     Health
+   </button>
+   <button data-page="groceries" onclick="showPage('groceries',this)">
+     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+     Shop
+   </button>
+   <button data-page="chat" onclick="showPage('chat',this)">
+     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+     Connect
+   </button>
+   <button data-page="more" onclick="showPage('more',this)">
+     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+     More
+   </button>
   </nav>
   <div class="user-mini">
    <div class="avatar" id="avatar">S</div>
@@ -380,7 +384,10 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
  <main class="main">
   <header class="topbar">
    <div><h2 id="pageTitle">Your Dashboard</h2><p id="dateText"></p></div>
-   <button onclick="showPage('more')">⚙ Settings</button>
+   <button onclick="showPage('more')">
+     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+     Settings
+   </button>
   </header>
 
   <!-- HOME -->
@@ -390,32 +397,73 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
      <h1>Good to see you, <span id="welcomeName">Friend</span>!</h1>
      <p>Take things one step at a time.<br>We're here to help you through your day.</p>
     </div>
-    <div class="welcome-icon">✦</div>
+    <div class="welcome-icon">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    </div>
    </div>
 
    <div class="sos">
-    <div><h3>Need urgent assistance?</h3><p>Contact your trusted emergency person.</p></div>
+    <div><h3>Need urgent assistance?</h3><p>Contact your trusted emergency person immediately.</p></div>
     <button onclick="emergency()">SOS HELP</button>
    </div>
 
    <div class="stats">
-    <div class="stat"><div class="stat-icon">✓</div><small>Today's check-in</small><h2 id="checkStat">Pending</h2></div>
-    <div class="stat"><div class="stat-icon">♡</div><small>Today's mood</small><h2 id="moodStat">Not set</h2></div>
-    <div class="stat"><div class="stat-icon">💊</div><small>Medicine reminders</small><h2 id="medStat">0</h2></div>
-    <div class="stat"><div class="stat-icon">🛒</div><small>Shopping items</small><h2 id="shopStat">0</h2></div>
+    <div class="stat">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+      <small>Today's check-in</small><h2 id="checkStat">Pending</h2>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+      <small>Today's mood</small><h2 id="moodStat">Not set</h2>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <small>Medicine reminders</small><h2 id="medStat">0</h2>
+    </div>
+    <div class="stat">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
+      <small>Shopping items</small><h2 id="shopStat">0</h2>
+    </div>
    </div>
 
    <h3 class="section-title">Your Everyday Services</h3>
    <div class="cards">
-    <div class="card" onclick="showPage('attendance')"><div class="card-icon">✓</div><h3>Daily Attendance</h3><p>Let trusted people know you're doing okay.</p><a>CHECK IN →</a></div>
-    <div class="card" onclick="showPage('location')"><div class="card-icon">📍</div><h3>GPS Location</h3><p>Get and share your location when you choose.</p><a>OPEN GPS →</a></div>
-    <div class="card" onclick="showPage('health')"><div class="card-icon">✚</div><h3>Medical Support</h3><p>Manage medicines and appointments.</p><a>OPEN HEALTH →</a></div>
-    <div class="card" onclick="showPage('groceries')"><div class="card-icon">🛒</div><h3>Groceries</h3><p>Organize your everyday shopping list.</p><a>SHOP NOW →</a></div>
-    <div class="card" onclick="showPage('food')"><div class="card-icon">🍲</div><h3>Food & Meals</h3><p>Plan your daily meals.</p><a>EXPLORE →</a></div>
-    <div class="card" onclick="showPage('chat')"><div class="card-icon">💬</div><h3>Let's Connect</h3><p>Conversations, hobbies and community.</p><a>CONNECT →</a></div>
-    <div class="card" onclick="showPage('health')"><div class="card-icon">⏰</div><h3>Reminders</h3><p>Keep track of appointments and medicines.</p><a>VIEW →</a></div>
-    <div class="card" onclick="showPage('mood')"><div class="card-icon">🌿</div><h3>Calm Zone</h3><p>Take a peaceful moment for yourself.</p><a>RELAX →</a></div>
-    <div class="card" onclick="showPage('services')"><div class="card-icon">🔧</div><h3>Home Services</h3><p>Find help with household tasks.</p><a>EXPLORE →</a></div>
+    <div class="card" onclick="showPage('attendance')">
+      <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+      <h3>Daily Attendance</h3><p>Let trusted people know you're doing okay.</p><a>Check in</a>
+    </div>
+    <div class="card" onclick="showPage('location')">
+      <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <h3>GPS Location</h3><p>Get and share your location when you choose.</p><a>Open GPS</a>
+    </div>
+    <div class="card" onclick="showPage('health')">
+      <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+      <h3>Medical Support</h3><p>Manage medicines and appointments.</p><a>Open Health</a>
+    </div>
+    <div class="card" onclick="showPage('groceries')">
+      <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
+      <h3>Groceries</h3><p>Organize your everyday shopping list.</p><a>Shop Now</a>
+    </div>
+    <div class="card" onclick="showPage('food')">
+      <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+      <h3>Food & Meals</h3><p>Plan your daily meals easily.</p><a>Explore</a>
+    </div>
+    <div class="card" onclick="showPage('chat')">
+      <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+      <h3>Let's Connect</h3><p>Conversations, hobbies and community.</p><a>Connect</a>
+    </div>
+    <div class="card" onclick="showPage('health')">
+      <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <h3>Reminders</h3><p>Keep track of appointments and medicines.</p><a>View</a>
+    </div>
+    <div class="card" onclick="showPage('mood')">
+      <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+      <h3>Calm Zone</h3><p>Take a peaceful moment for yourself.</p><a>Relax</a>
+    </div>
+    <div class="card" onclick="showPage('services')">
+      <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+      <h3>Home Services</h3><p>Find help with household tasks.</p><a>Explore</a>
+    </div>
    </div>
   </section>
 
@@ -488,10 +536,22 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
    <div class="panel">
     <h3>Community & Hobby Groups</h3>
     <div class="cards">
-     <div class="card" onclick="joinGroup('Music')">🎵<h3>Music Lovers</h3><p>Share your favourite music.</p></div>
-     <div class="card" onclick="joinGroup('Cooking')">🍳<h3>Cooking Club</h3><p>Exchange recipes.</p></div>
-     <div class="card" onclick="joinGroup('Movies')">🎬<h3>Movie Club</h3><p>Talk about films.</p></div>
-     <div class="card" onclick="joinGroup('Books')">📚<h3>Reading Circle</h3><p>Discuss books.</p></div>
+     <div class="card" onclick="joinGroup('Music')">
+       <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+       <h3>Music Lovers</h3><p>Share your favourite music.</p>
+     </div>
+     <div class="card" onclick="joinGroup('Cooking')">
+       <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+       <h3>Cooking Club</h3><p>Exchange recipes.</p>
+     </div>
+     <div class="card" onclick="joinGroup('Movies')">
+       <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="17" x2="22" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/></svg></div>
+       <h3>Movie Club</h3><p>Talk about films.</p>
+     </div>
+     <div class="card" onclick="joinGroup('Books')">
+       <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+       <h3>Reading Circle</h3><p>Discuss books.</p>
+     </div>
     </div>
     <div id="groupResult" class="result hidden"></div>
    </div>
@@ -526,10 +586,22 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
     <h3>Home Services</h3>
     <p>Choose a service. Real bookings require verified service providers.</p>
     <div class="cards" style="margin-top:20px">
-     <div class="card" onclick="serviceRequest('Electrician')">⚡<h3>Electrician</h3><p>Electrical assistance.</p></div>
-     <div class="card" onclick="serviceRequest('Plumber')">🚰<h3>Plumber</h3><p>Plumbing assistance.</p></div>
-     <div class="card" onclick="serviceRequest('Cleaning')">🧹<h3>Cleaning</h3><p>House cleaning.</p></div>
-     <div class="card" onclick="serviceRequest('Laundry')">👕<h3>Laundry</h3><p>Laundry services.</p></div>
+     <div class="card" onclick="serviceRequest('Electrician')">
+       <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+       <h3>Electrician</h3><p>Electrical assistance.</p>
+     </div>
+     <div class="card" onclick="serviceRequest('Plumber')">
+       <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2z"/><path d="M4 12V8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v4"/></svg></div>
+       <h3>Plumber</h3><p>Plumbing assistance.</p>
+     </div>
+     <div class="card" onclick="serviceRequest('Cleaning')">
+       <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div>
+       <h3>Cleaning</h3><p>House cleaning.</p>
+     </div>
+     <div class="card" onclick="serviceRequest('Laundry')">
+       <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="12" cy="13" r="4"/><line x1="12" y1="9" x2="12" y2="9.01"/><line x1="8" y1="7" x2="8" y2="7.01"/></svg></div>
+       <h3>Laundry</h3><p>Laundry services.</p>
+     </div>
     </div>
     <div id="serviceResult" class="result hidden"></div>
    </div>
@@ -714,7 +786,7 @@ function getLocation(){
   box.textContent="Location received. ";
   const a=document.createElement("a");
   a.href=link;a.target="_blank";a.rel="noopener";a.textContent="View on Google Maps";
-  a.style.color="#4F46E5";
+  a.style.color="#4338CA"; a.style.fontWeight="700";
   box.appendChild(document.createElement("br"));
   box.appendChild(document.createTextNode("Latitude: "+lat.toFixed(5)+" | Longitude: "+lon.toFixed(5)));
   box.appendChild(document.createElement("br"));
@@ -775,8 +847,8 @@ function renderGroceries(){
  const list=$("groceryList");list.replaceChildren();
  (getData().groceries||[]).forEach((g,i)=>{
   const div=document.createElement("div");div.className="item";
-  const label=document.createElement("label");
-  const check=document.createElement("input");check.type="checkbox";check.checked=g.done;check.style.marginRight="9px";check.style.transform="scale(1.2)";
+  const label=document.createElement("label"); label.style.display="flex"; label.style.alignItems="center"; label.style.cursor="pointer";
+  const check=document.createElement("input");check.type="checkbox";check.checked=g.done;check.style.marginRight="12px";check.style.transform="scale(1.3)";
   check.onchange=()=>{
    const d=getData();d.groceries[i].done=check.checked;saveData(d);renderGroceries();updateStats();
   };
