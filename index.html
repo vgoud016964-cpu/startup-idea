@@ -9,11 +9,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
 :root {
-  /* New Professional Color Palette */
-  --primary: #4F46E5; /* Indigo */
+  --primary: #4F46E5;
   --primary-hover: #4338CA;
-  --secondary: #F43F5E; /* Coral/Rose for SOS */
-  --bg-color: #F8FAFC; /* Very light blue/gray */
+  --secondary: #F43F5E;
+  --bg-color: #F8FAFC;
   --surface: #FFFFFF;
   --text-main: #0F172A;
   --text-muted: #64748B;
@@ -43,13 +42,12 @@ button { cursor: pointer; border: none; background: none; }
 /* Typography */
 h1, h2, h3, .logo { font-family: 'Plus Jakarta Sans', sans-serif; }
 
-.logo {
-  font-size: 24px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  color: var(--text-main);
+/* NEW LOGO STYLE */
+.brand-logo {
+  height: 40px; /* Medium size */
+  width: auto;
+  display: block;
 }
-.logo span { color: var(--primary); }
 
 button:focus-visible, input:focus-visible {
   outline: 2px solid var(--primary);
@@ -72,7 +70,6 @@ button:focus-visible, input:focus-visible {
   position: relative;
   overflow: hidden;
 }
-/* Add abstract shapes for "unique" feel */
 .auth-left::before {
   content: ''; position: absolute; width: 400px; height: 400px;
   background: rgba(255,255,255,0.1); border-radius: 50%; top: -100px; left: -100px;
@@ -80,6 +77,7 @@ button:focus-visible, input:focus-visible {
 .auth-left .logo { color: white; }
 .auth-left .logo span { color: #C7D2FE; }
 
+/* New Hero layout with logo */
 .hero { max-width: 480px; position: relative; z-index: 1; }
 .hero h1 { font-size: clamp(40px, 4vw, 56px); line-height: 1.1; margin-bottom: 24px; font-weight: 800; }
 .hero p { font-size: 18px; color: #E0E7FF; line-height: 1.6; }
@@ -128,7 +126,7 @@ button:focus-visible, input:focus-visible {
   position: fixed; inset: 0 auto 0 0; width: 260px; background: var(--surface);
   border-right: 1px solid var(--border); padding: 30px 20px; display: flex; flex-direction: column; z-index: 10;
 }
-.sidebar .logo { margin: 0 10px 40px; font-size: 22px; }
+.sidebar .brand-logo { margin: 0 10px 40px; }
 .nav-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; color: var(--text-muted); margin: 0 10px 12px; }
 .nav { display: flex; flex-direction: column; gap: 4px; }
 .nav button {
@@ -198,6 +196,32 @@ button:focus-visible, input:focus-visible {
 .stat h2 { font-size: 28px; font-weight: 800; margin-top: 8px; color: var(--text-main); }
 .stat-icon { font-size: 24px; margin-bottom: 12px; }
 
+/* STICKY NOTE STYLE */
+.sticky-note {
+  background: #FEF08A; /* Yellow sticky note */
+  border: 1px solid #FDE047; border-radius: var(--radius-md);
+  padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow-md);
+}
+.sticky-note h3 { font-size: 18px; margin-bottom: 12px; color: #854D0E; }
+.sticky-note textarea {
+  width: 100%; min-height: 100px; background: transparent; border: none;
+  resize: vertical; font-family: inherit; font-size: 15px; color: #854D0E;
+  line-height: 1.5; outline: none;
+}
+
+/* HYDRATION TRACKER */
+.hydration-tracker {
+  background: #E0F2FE; border: 1px solid #BAE6FD; border-radius: var(--radius-md);
+  padding: 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;
+}
+.hydration-tracker h4 { color: #0369A1; margin-bottom: 6px; font-size: 16px; }
+.hydration-tracker p { color: #0C4A6E; font-size: 14px; }
+.hydration-btn {
+  background: #0284C7; color: white; border: none; padding: 10px 20px;
+  border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; transition: 0.2s;
+}
+.hydration-btn:hover { background: #0369A1; }
+
 .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .card {
   cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -263,7 +287,7 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
   .auth-left { display: none; }
   .auth-right { min-height: 100vh; }
   .sidebar { inset: auto 0 0 0; width: 100%; height: auto; padding: 10px; border: none; border-top: 1px solid var(--border); flex-direction: row; }
-  .sidebar > .logo, .nav-label, .user-mini { display: none; }
+  .sidebar > .brand-logo, .nav-label, .user-mini { display: none; } /* UPDATED FOR LOGO */
   .nav { flex-direction: row; justify-content: space-around; width: 100%; }
   .nav button { text-align: center; font-size: 11px; padding: 10px 5px; flex: 1; flex-direction: column; gap: 4px; }
   .main { margin: 0; padding: 24px 16px 100px; }
@@ -282,7 +306,9 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
 
 <section class="auth" id="auth">
  <div class="auth-left">
-  <div class="logo" style="color:white;">SOLO<span style="color:#C7D2FE;">CARE</span></div>
+  <!-- LOGO REPLACEMENT -->
+  <img src="logo.png" alt="SOLOCARE" class="brand-logo" style="filter: brightness(0) invert(1);">
+  
   <div class="hero">
    <h1>Living alone.<br>Never alone.</h1>
    <p>Your personal companion for safety, wellness, everyday needs and meaningful connections. A little support can make every day better.</p>
@@ -292,7 +318,8 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
 
  <div class="auth-right">
   <div class="auth-box">
-   <div class="logo">SOLO<span>CARE</span></div>
+   <!-- LOGO REPLACEMENT -->
+   <img src="logo.png" alt="SOLOCARE" class="brand-logo">
 
    <!-- LOGIN FORM -->
    <form id="loginForm">
@@ -355,7 +382,9 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
 
 <div id="dashboard">
  <aside class="sidebar">
-  <div class="logo">SOLO<span>CARE</span></div>
+  <!-- LOGO REPLACEMENT -->
+  <img src="logo.png" alt="SOLOCARE" class="brand-logo">
+  
   <div class="nav-label">YOUR SPACE</div>
   <nav class="nav">
    <button class="active" data-page="home" onclick="showPage('home',this)">⌂ Home</button>
@@ -385,6 +414,12 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
      <p>Take things one step at a time.<br>We're here to help you through your day.</p>
     </div>
     <div class="welcome-icon">✦</div>
+   </div>
+
+   <!-- NEW FEATURE: STICKY NOTE -->
+   <div class="sticky-note">
+    <h3>📝 Quick Note for Today</h3>
+    <textarea id="quickNote" placeholder="Write down a thought, task, or memory here..."></textarea>
    </div>
 
    <div class="sos">
@@ -437,6 +472,20 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
 
   <!-- HEALTH -->
   <section class="page" id="health">
+   <!-- NEW FEATURE: HYDRATION -->
+   <div class="panel">
+    <h3>Daily Hydration</h3>
+    <p>Keep your body refreshed. Aim for 8 glasses a day.</p>
+    <div class="hydration-tracker">
+      <div>
+        <h4>Water Intake</h4>
+        <p id="waterCount">0 / 8 glasses</p>
+      </div>
+      <button class="hydration-btn" onclick="addWater()">+ Drink Water</button>
+    </div>
+    <button class="action secondary" onclick="resetWater()">Reset Tracker</button>
+   </div>
+
    <div class="panel">
     <h3>Medicine & Appointment Reminders</h3>
     <div class="field"><label>Medicine or appointment name</label><input id="medName" placeholder="Enter reminder name"></div>
@@ -737,6 +786,34 @@ function emergency(){
  }else send("I could not share my location.");
 }
 
+// Quick Note Logic
+function saveNote(){
+ const d=getData();
+ d.quickNote=$("quickNote").value;
+ saveData(d);
+}
+setInterval(saveNote, 3000); // Auto-save note every 3 seconds
+
+// Hydration Logic
+function addWater(){
+ const d=getData();
+ d.water=(d.water||0)+1;
+ if(d.water>8) d.water=8;
+ saveData(d);
+ updateWaterUI();
+}
+function resetWater(){
+ const d=getData();
+ d.water=0;
+ saveData(d);
+ updateWaterUI();
+}
+function updateWaterUI(){
+ const d=getData();
+ const count=d.water||0;
+ if($("waterCount")) $("waterCount").textContent=count+" / 8 glasses";
+}
+
 function addMedicine(){
  const name=$("medName").value.trim(),time=$("medTime").value;
  if(!name||!time){alert("Enter a reminder and time.");return}
@@ -862,6 +939,12 @@ function loadData(){
   $("dinner").value=d.meals.dinner||"";
   $("mealResult").textContent="Your saved meal plan is ready.";
  }
+ // Load Quick Note
+ if($("quickNote")) $("quickNote").value=d.quickNote||"";
+ 
+ // Load Water Tracker
+ updateWaterUI();
+ 
  renderMedicine();renderGroceries();
 }
 </script>
