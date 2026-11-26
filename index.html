@@ -51,7 +51,7 @@ h1, h2, h3, .logo-text { font-family: 'Manrope', sans-serif; }
 .sidebar .logo { height: 45px; margin: 0 0 40px 10px; }
 
 /* --- AUTH SCREEN --- */
-.auth { min-height: 100vh; display: grid; grid-template-columns: 1.2fr 1fr; }
+.auth { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
 .auth-left {
   padding: 60px;
   display: flex; flex-direction: column; justify-content: space-between;
@@ -283,16 +283,18 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
 <!-- AUTHENTICATION -->
 <section class="auth" id="auth">
  <div class="auth-left">
-  <!-- Logo removed from here -->
   <div class="hero">
    <h1>Living alone.<br>Never alone.</h1>
    <p>Your personal companion for safety, wellness, everyday needs and meaningful connections. A little support can make every day better.</p>
-        <div class="trust-badges">
+   
+   <div class="trust-badges">
      <div class="badge">
        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
        Bank-grade Security
      </div>
    </div>
+  </div>
+
   <div class="glass-quote">
     <p>"Independence feels better when someone cares. We built SOLOCARE to ensure no one ever feels truly alone."</p>
     <small>— The SOLOCARE Promise</small>
@@ -301,7 +303,6 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
 
  <div class="auth-right">
   <div class="auth-box">
-   <!-- Only logo on the right side -->
    <img src="logo.png" alt="SOLOCARE" class="logo">
    
    <form id="loginForm">
