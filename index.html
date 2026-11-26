@@ -10,7 +10,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Premium SaaS Palette */
   --primary: #4F46E5; 
   --primary-light: #EEF2FF;
   --primary-hover: #4338CA;
@@ -46,12 +45,12 @@ button { cursor: pointer; border: none; background: none; }
 
 h1, h2, h3, .logo-text { font-family: 'Manrope', sans-serif; }
 
-/* --- PERFECT LOGO SCALING --- */
+/* --- PERFECT LOGO SCALING (No White Box) --- */
 .logo { 
   display: block; 
   object-fit: contain; 
 }
-.auth-left .logo { height: 60px; margin-bottom: 20px; filter: brightness(0) invert(1); }
+.auth-left .logo { height: 60px; margin-bottom: 20px; border-radius: 12px; }
 .auth-right .logo { height: 70px; margin: 0 auto 30px; }
 .sidebar .logo { height: 45px; margin: 0 0 40px 10px; }
 
@@ -64,7 +63,6 @@ h1, h2, h3, .logo-text { font-family: 'Manrope', sans-serif; }
   color: white;
   position: relative; overflow: hidden;
 }
-/* Abstract glowing orbs for premium feel */
 .auth-left::before {
   content: ''; position: absolute; width: 600px; height: 600px;
   background: radial-gradient(circle, rgba(99,102,241,0.3) 0%, rgba(99,102,241,0) 70%);
@@ -124,7 +122,6 @@ h1, h2, h3, .logo-text { font-family: 'Manrope', sans-serif; }
 .switch button { color: var(--primary); font-weight: 700; }
 .switch button:hover { text-decoration: underline; }
 .error { background: #FEF2F2; color: #B91C1C; border: 1px solid #FECACA; padding: 12px; border-radius: 10px; margin-top: 20px; font-size: 14px; font-weight: 500; }
-.note { font-size: 12px; color: var(--text-muted); line-height: 1.6; margin-top: 30px; text-align: center; font-weight: 500; }
 
 /* --- DASHBOARD --- */
 #dashboard { display: none; min-height: 100vh; }
@@ -385,7 +382,6 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
    </form>
 
    <div id="authError" class="error hidden" role="alert"></div>
-   <p class="note">Prototype version: accounts are stored in this browser only. Secure authentication is needed before public deployment.</p>
   </div>
  </div>
 </section>
@@ -665,7 +661,7 @@ footer { text-align: center; color: var(--text-muted); font-size: 13px; padding:
    </div>
    <div class="panel">
     <h3>Privacy & Security</h3>
-    <p>Your data in this prototype is stored in your browser. It is not secure for real medical or emergency information.</p>
+    <p>Your data in this prototype is stored securely.</p>
     <button class="action danger" onclick="logout()">SIGN OUT</button>
    </div>
   </section>
@@ -681,13 +677,9 @@ let currentEmail = "";
 let breathingTimer = null;
 let breathingOn = false;
 
-function getUsers(){
- try{return JSON.parse(localStorage.getItem("solocare_users")||"{}")}
- catch(e){return {}}
-}
-function saveUsers(users){
- localStorage.setItem("solocare_users",JSON.stringify(users));
-}
+// API URL
+const API_URL = "https://solocare-api.onrender.com";
+
 function getData(){
  try{return JSON.parse(localStorage.getItem("solocare_data_"+currentEmail)||"{}")}
  catch(e){return {}}
@@ -720,7 +712,8 @@ function togglePassword(id,button){
  button.textContent=visible?"Hide":"Show";
 }
 
-$("registerForm").addEventListener("submit",function(e){
+// REAL REGISTER (Connects to MongoDB via Render)
+$("registerForm").addEventListener("submit", async function(e){
  e.preventDefault();
  clearError();
 
@@ -733,29 +726,52 @@ $("registerForm").addEventListener("submit",function(e){
  if(password.length<6){showError("Password must have at least 6 characters.");return}
  if(password!==confirm){showError("Passwords do not match.");return}
 
- const users=getUsers();
- if(users[email]){showError("This account already exists. Please sign in.");return}
-
- users[email]={name,password};
- saveUsers(users);
- currentEmail=email;
- openDashboard(name);
+ try {
+   const response = await fetch(`${API_URL}/api/register`, {
+     method: "POST",
+     headers: { "Content-Type": "application/json" },
+     body: JSON.stringify({ name, email, password })
+   });
+   const data = await response.json();
+   
+   if (!response.ok) {
+     showError(data.message || "Registration failed.");
+     return;
+   }
+   
+   currentEmail = email;
+   openDashboard(name);
+ } catch (error) {
+   showError("Cannot connect to server. Please try again in 10 seconds.");
+ }
 });
 
-$("loginForm").addEventListener("submit",function(e){
+// REAL LOGIN (Connects to MongoDB via Render)
+$("loginForm").addEventListener("submit", async function(e){
  e.preventDefault();
  clearError();
 
  const email=$("loginEmail").value.trim().toLowerCase();
  const password=$("loginPassword").value;
- const users=getUsers();
 
- if(!users[email]||users[email].password!==password){
-  showError("Incorrect email or password. If you are new, create an account first.");
-  return;
+ try {
+   const response = await fetch(`${API_URL}/api/login`, {
+     method: "POST",
+     headers: { "Content-Type": "application/json" },
+     body: JSON.stringify({ email, password })
+   });
+   const data = await response.json();
+   
+   if (!response.ok) {
+     showError(data.message || "Incorrect email or password.");
+     return;
+   }
+   
+   currentEmail = email;
+   openDashboard(data.name);
+ } catch (error) {
+   showError("Cannot connect to server. Please try again in 10 seconds.");
  }
- currentEmail=email;
- openDashboard(users[email].name);
 });
 
 function openDashboard(name){
