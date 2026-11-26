@@ -1,17 +1,19 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const bcrypt = require('bcryptjs'); 
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import bcrypt from 'bcryptjs';
 
 const app = express();
-app.use(cors()); 
-app.use(express.json()); 
+app.use(cors());
+app.use(express.json());
 
+// Connect to MongoDB (Render provides MONGO_URI)
 const MONGO_URI = process.env.MONGO_URI; 
-
 mongoose.connect(MONGO_URI)
   .then(() => console.log('MongoDB connected successfully'))
   .catch(err => console.error('MongoDB connection error:', err));
+
+// --- DATABASE MODELS ---
 
 // 1. User Model (for Login/Register)
 const userSchema = new mongoose.Schema({
@@ -21,14 +23,14 @@ const userSchema = new mongoose.Schema({
 });
 const User = mongoose.model('User', userSchema);
 
-// 2. User Data Model (for Groceries, Moods, etc.)
+// 2. User Data Model (for Groceries, Moods, Medicines, etc.)
 const dataSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
-  data: { type: Object, default: {} } // Stores everything in one JSON object
+  data: { type: Object, default: {} } 
 });
 const UserData = mongoose.model('UserData', dataSchema);
 
-// --- ROUTES ---
+// --- API ROUTES ---
 
 // Register
 app.post('/api/register', async (req, res) => {
@@ -41,12 +43,12 @@ app.post('/api/register', async (req, res) => {
     const newUser = new User({ name, email, password: hashedPassword });
     await newUser.save();
     
-    // Initialize empty data for this user
+    // Initialize empty data profile
     await new UserData({ email, data: {} }).save();
 
     res.status(201).json({ message: "Account created", name });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Server error during registration." });
   }
 });
 
@@ -62,11 +64,11 @@ app.post('/api/login', async (req, res) => {
     
     res.status(200).json({ message: "Login successful", name: user.name });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Server error during login." });
   }
 });
 
-// GET All User Data
+// Get User Data
 app.post('/api/get-data', async (req, res) => {
   try {
     const { email } = req.body;
@@ -74,22 +76,22 @@ app.post('/api/get-data', async (req, res) => {
     if (!userData) return res.status(404).json({ message: "Data not found" });
     res.status(200).json(userData.data);
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Server error fetching data." });
   }
 });
 
-// SAVE All User Data
+// Save User Data
 app.post('/api/save-data', async (req, res) => {
   try {
     const { email, data } = req.body;
     await UserData.findOneAndUpdate(
       { email }, 
       { data }, 
-      { upsert: true, new: true } // Create if doesn't exist, update if it does
+      { upsert: true, new: true }
     );
     res.status(200).json({ message: "Data saved successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Server error saving data." });
   }
 });
 
